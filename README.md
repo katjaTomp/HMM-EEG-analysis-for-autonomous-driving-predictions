@@ -1,5 +1,7 @@
 Steps to execute this code:
    Run from command line: 
+   
+   
       1. $ python EegPreprocessor.py
       
       After running the previous script, the pickled files were generated. You can move them to a different way. 
