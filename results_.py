@@ -1,45 +1,13 @@
+"""
+This script can be executed to retrieve the results
+
+"""
 from __future__ import division
 import numpy as np
 import pickle
 import csv
 import pandas as pd
 
-
-#data frames used in analysis
-#General 3state analysis
-## dataFrame_ALL_3_
-## dataFrame High_3
-## dataFrame_High_3__driving
-## dataFrame_High_3__autonomous
-## dataFrame_High_3__stationary
-## dataFrame_High_3__afterdriving
-## dataFrame_High_3__afterautonomous
-## dataFrame_High_3__afterstationary
-## dataFrame_Low_3
-## dataFrame_Low_3__driving
-## dataFrame_Low_3__autonomous
-## dataFrame_Low_3__stationary
-## dataFrame_Low_3__afterdriving
-## dataFrame_Low_3__afterautonomous
-## dataFrame_Low_3__afterstationary
-
-#General 5 state analysis
-
-## dataFrame_ALL_5
-## dataFrame High_5
-## dataFrame_High_5__driving
-## dataFrame_High_5__autonomous
-## dataFrame_High_5__stationary
-## dataFrame_High_5__afterdriving
-## dataFrame_High_5__afterautonomous
-## dataFrame_High_5__afterstationary
-## dataFrame_Low_5
-## dataFrame_Low_5__driving
-## dataFrame_Low_5__autonomous
-## dataFrame_Low_5__stationary
-## dataFrame_Low_5__afterdriving
-## dataFrame_Low_5__afterautonomous
-## dataFrame_Low_5__afterstationary
 
 all_events = ["65304", "65306","65308","65281","65284","65286","65288","65298","65296","65294"]
 driving = ["65304", "65306","65308"]
@@ -89,12 +57,10 @@ def get_data_frame(condition='driving', states="3",ba=True,group='High'):
         return 'dataFrame_' + group + '_' + states + '_' + ba + condition
 
 
-
-
 states = 3
-per_condition =True
-ba=True # if False then after stimulus else before stimulus
-group='High'
+per_condition = True
+ba = True # if False then after stimulus else before stimulus
+group = 'High'
 data_frame = pd.DataFrame(columns=['condition','event','percentage'])
 all = True
 
@@ -104,7 +70,7 @@ if per_condition:
     #Per condition
     driving_condition = ['driving', 'autonomous', 'stationary']
     for condition in driving_condition:
-        filename = get_data_frame(condition=condition, states=str(states), ba=ba,group=group)
+        filename = get_data_frame(condition=condition, states=str(states), ba=ba, group=group)
         #print filename
         df = pickle.load(open(filename, 'r'))  ## choose the data frame from the list above
 

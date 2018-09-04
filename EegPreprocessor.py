@@ -1,3 +1,9 @@
+"""
+This script functionality accounts to reading EEG files,removing different types of artifacts by
+applying filters and rejecting explicitely annotated EOG events. Next, the data is baseline corrected and
+downsampled from 2048 Hz to 200 Hz
+"""
+
 import mne
 import matplotlib
 import numpy as np
@@ -9,10 +15,10 @@ matplotlib.use('TkAgg')
 matplotlib.interactive(False)
 
 
-### fix the 50 ms delay by adding the 50ms to the events first column's  values
+### fix the 50 ms delay by subtracting the 50ms to the events first column's  values
 ## mne converts seconds to secs * sample freq therefore, I will add 0.05 sec * 2048 Hz = 102,4 ~ 102 to each timestamp in the events
 
-def add50ms(events):
+def subtract50ms(events):
 
     for i in range(len(events)):
         events[i][:1:1] -= 102
@@ -43,9 +49,9 @@ def addBadChannels(raw):
 
 def findEvents(raw):
     events = mne.find_events(raw, shortest_event=1 , output="onset",consecutive='increasing',  stim_channel="STI 014")#,
+    events = subtract50ms(events)
     #print(events)
-    events = add50ms(events)
-    #print(events)
+
     return events
 
 
@@ -125,6 +131,7 @@ def downsampleEpochs(freq, epochs):
 
 
 # Data pre-processing
+# uncomment the code below and adjust if necessary the bdf file names.
 '''
 
 filenames = ['PPN1_10mei.bdf',
@@ -180,10 +187,10 @@ for filename in filenames:
     epochs.plot(picks,block=True)
     data = epochs.get_data()
 
-#mne.viz.plot_events(events=events)
+    #mne.viz.plot_events(events=events)
 
 
-# putting epochs into data frame
+    # putting epochs into data frame
     index = ['epoch','time']  # 1, dict(grad=1e13)
     df = epochs.to_data_frame(picks=None, scalings=None, index=index)
     df.to_pickle(filename+'-downsampled_noEOG_200.pkl')

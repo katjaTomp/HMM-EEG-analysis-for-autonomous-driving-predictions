@@ -13,6 +13,9 @@ if not sys.warnoptions:
     warnings.simplefilter("ignore")
 
 
+# These are the files obtained after running EegPreprocessor.py script
+# Adjust the names and location according to your file structure
+
 files = ['noEOG_diff_epoching/1.pkl',
          'noEOG_diff_epoching/2.pkl',
          'noEOG_diff_epoching/3.pkl',
@@ -40,6 +43,7 @@ participants_data_2 =  'noEOG_diff_epoching/19_2.pkl'
 ppn1 = pd.read_pickle(participants_data_1)
 ppn1_1 = pd.read_pickle(participants_data_2)
 ppn = pd.concat([ppn1,ppn1_1])
+
 result = ppn.reset_index()
 result = result[['epoch', 'time', 'condition']]
 
