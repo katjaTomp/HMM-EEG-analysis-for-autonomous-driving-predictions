@@ -1,3 +1,11 @@
+Prerequisites:
+ 1.numpy
+ 2.pandas
+ 3.mne (https://martinos.org/mne/stable/index.html)
+ 4. pickle
+ 5. matplotlib
+
+
 Below you can find the steps to retrive the results of my master thesis "Can we predict attentional flutuations during(autonomous) driving by using HMMs?".
    
       Run from command line: 
