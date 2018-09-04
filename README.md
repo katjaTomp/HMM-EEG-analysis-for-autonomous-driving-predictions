@@ -1,4 +1,4 @@
-Below you can find the steps to retrive the results of my master thesis "Can we predict attentional flutuations during(autonomous) driving by using HMMs".
+Below you can find the steps to retrive the results of my master thesis "Can we predict attentional flutuations during(autonomous) driving by using HMMs?".
    
       Run from command line: 
    
